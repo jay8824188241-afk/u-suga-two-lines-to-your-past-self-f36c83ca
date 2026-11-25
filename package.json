@@ -1,0 +1,1 @@
+{"description":"Two lines to your past self: stay at the rooftop party on 9 October 2017 and say you love her.","engines":{"node":">=22"},"main":"main.ts","name":"u-suga-two-lines-to-your-past-self-f36c83ca","private":true,"scripts":{"start":"node main.ts"},"type":"module","version":"1.0.0"}
