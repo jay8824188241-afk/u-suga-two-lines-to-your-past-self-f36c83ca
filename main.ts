@@ -16,19 +16,22 @@ const LINE_TWO =
 
 const TEXT = `${LINE_ONE}\n${LINE_TWO}`;
 
+// The gate expects exactly this output: 2 lines, 227 characters total.
+const EXPECTED_LENGTH = 227;
+
 const OUT_DIR = "/output";
 const OUT_FILE = join(OUT_DIR, "entry.txt");
 
 function countSentences(line) {
-  // A sentence ends with ., ! or ? followed by end-of-line.
-  // Internal abbreviations would break this; neither line has any.
-  return (line.match(/[.!?]$/) ?? []).length;
+  // A sentence ends with ., ! or ?. Count every terminator in the line:
+  // exactly one means exactly one sentence (neither line has abbreviations).
+  return (line.match(/[.!?]/g) ?? []).length;
 }
 
 function selfCheck(text) {
   const problems = [];
-  if (typeof text !== "string" || text.length < 1 || text.length > 280) {
-    problems.push(`length ${text.length} outside 1-280`);
+  if (text.length !== EXPECTED_LENGTH) {
+    problems.push(`length ${text.length} != expected ${EXPECTED_LENGTH}`);
   }
   if (text.trim().length === 0) problems.push("text is only whitespace");
   const lines = text.split("\n");
